@@ -1,0 +1,54 @@
+{
+  "user": {
+    "first_name": "Tolkun",
+    "photo": "https://fb.ru/misc/i/gallery/47665/1832235.jpg",
+    "second_name": "Zhakypbekova",
+    "education": 4,
+    "company": [
+      {
+        "name": "TEST_COMPANY",
+        "position": "developer"
+      },
+      {
+        "name": "Google",
+        "position": "developer"
+      },
+      {
+        "name": "Amazon",
+        "position": "developer"
+      },
+      {
+        "name": "TEST_COMPANY",
+        "position": "developer"
+      },
+      {
+        "name": "Google",
+        "position": "developer"
+      },
+      {
+        "name": "Amazon",
+        "position": "developer"
+      },
+      {
+        "name": "TEST_COMPANY",
+        "position": "developer"
+      },
+      {
+        "name": "Netflix",
+        "position": "developer"
+      },
+      {
+        "name": "Meta",
+        "position": "developer"
+      },
+      {
+        "name": "Attractor",
+        "position": "developer"
+      },
+      {
+        "name": "MAdDevs",
+        "position": "developer"
+      }
+    ]
+  }
+}
