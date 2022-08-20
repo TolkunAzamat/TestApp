@@ -16,14 +16,14 @@ import org.chromium.base.FileUtils
 import java.io.File
 
 class MainActivity2 : AppCompatActivity() {
-   private lateinit var binding:ActivityMain2Binding
+    private lateinit var binding: ActivityMain2Binding
     lateinit var imageAdapter: AdapterImages
     var selectedPaths = mutableListOf<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMain2Binding.inflate(layoutInflater)
+        binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         imageAdapter = AdapterImages()
@@ -32,7 +32,6 @@ class MainActivity2 : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val data: Intent? = result.data
-                    //If multiple image selected
                     if (data?.clipData != null) {
                         val count = data.clipData?.itemCount ?: 0
                         for (i in 0 until count) {
@@ -50,7 +49,6 @@ class MainActivity2 : AppCompatActivity() {
                         val file = getImageFromUri(imageUri)
                         file?.let {
                             selectedPaths.add(it.absolutePath)
-                            Log.d("LL",selectedPaths.toString())
                         }
                         imageAdapter.addSelectedImages(selectedPaths)
                     }
@@ -60,7 +58,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.galleryBtn.setOnClickListener {
             val intent = Intent(ACTION_GET_CONTENT)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.type = "*/*"
+            intent.type = "image/*"
             selectImagesActivityResult.launch(intent)
         }
         try {
@@ -71,11 +69,11 @@ class MainActivity2 : AppCompatActivity() {
 
     }
 
-    private fun getImageFromUri(imageUri: Uri?) : File? {
+    private fun getImageFromUri(imageUri: Uri?): File? {
         imageUri?.let { uri ->
             val mimeType = getMimeType(this@MainActivity2, uri)
             mimeType?.let {
-                val file = createTmpFileFromUri(this, imageUri,"temp_image", ".$it")
+                val file = createTmpFileFromUri(this, imageUri, "temp_image", ".$it")
                 file?.let { Log.d("image Url = ", file.absolutePath) }
                 return file
             }
@@ -94,11 +92,16 @@ class MainActivity2 : AppCompatActivity() {
         return extension
     }
 
-    private fun createTmpFileFromUri(context: Context, uri: Uri, fileName: String, mimeType: String): File? {
+    private fun createTmpFileFromUri(
+        context: Context,
+        uri: Uri,
+        fileName: String,
+        mimeType: String,
+    ): File? {
         return try {
             val stream = context.contentResolver.openInputStream(uri)
-            val file = File.createTempFile(fileName, mimeType,cacheDir)
-            FileUtils.copyStreamToFile(stream,file)
+            val file = File.createTempFile(fileName, mimeType, cacheDir)
+            FileUtils.copyStreamToFile(stream, file)
             file
         } catch (e: Exception) {
             e.printStackTrace()

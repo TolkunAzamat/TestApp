@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterImages: RecyclerView.Adapter<ImageViewHolder>() {
+class AdapterImages : RecyclerView.Adapter<ImageViewHolder>() {
 
     var selectedImagePath = listOf<String>()
 
